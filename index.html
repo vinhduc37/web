@@ -1,64 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Học menu đa cấp với class và id</title>
-    <link rel="stylesheet" href="menu.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Đinh Đức Vinh</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+<style>
+:root {
+  --bg:hsla(0, 0%, 0%, 0.963);
+  --text:#f5f5f5;
+  --muted:#bdbdbd;
+  --glass:rgba(241, 10, 10, 0.05);
+  --ease:cubic-bezier(.2,.9,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:"Inter",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+html{scroll-behavior:smooth}
+
+/* NAV */
+.topnav{
+  position:fixed;top:0;left:0;right:0;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px;
+  background:rgba(0, 0, 0, 0);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid rgba(54, 39, 39, 0.05);
+  z-index:1000;
+}
+.brand{font-weight:700;color:var(--text);}
+.hambtn{
+  background:transparent;border:none;
+  color:var(--text);font-size:22px;cursor:pointer;
+  transition:.3s;
+}
+.hambtn:hover{transform:scale(1.1);}
+
+/* HERO */
+.hero{
+  display:flex;max-width:1100px;width:90%;margin:100px auto 40px;
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 0 40px rgba(0,0,0,0.6);
+  border:1px solid rgba(255,255,255,0.05);
+}
+.hero-left{flex:1;min-height:480px;background:url('avatar.jpg') center/cover no-repeat;}
+.hero-right{flex:1;padding:48px;display:flex;flex-direction:column;justify-content:center;}
+h1{font-size:2.4rem}
+h3{color:var(--muted);margin-bottom:10px}
+.meta-list{list-style:none;margin-top:10px}
+.meta-list li{margin-bottom:6px;color:var(--muted);}
+.meta-list i{color:var(--text);margin-right:6px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,0.1);color:var(--text);
+  background:transparent;cursor:pointer;font-weight:600;transition:all .25s var(--ease);}
+.btn.primary{background:var(--text);color:var(--bg);}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,0.6);}
+.socials{margin-top:16px;}
+.socials a{color:var(--muted);margin-right:14px;font-size:1.2em;}
+.socials a:hover{color:var(--text);}
+
+/* SIDEBAR MENU */
+.sidebar-overlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;z-index:2000;
+  transition:opacity .3s var(--ease);
+}
+.sidebar{
+  position:absolute;top:0;right:-300px;
+  width:300px;height:100%;
+  background:#111;
+  display:flex;flex-direction:column;align-items:flex-start;
+  padding:80px 30px;
+  transition:transform .4s var(--ease);
+}
+.sidebar a,.sidebar button{
+  font-size:1.1rem;
+  color:var(--text);
+  background:none;border:none;
+  text-decoration:none;
+  margin-bottom:18px;
+  cursor:pointer;
+  transition:color .3s;
+}
+.sidebar a:hover,.sidebar button:hover{color:#fff;}
+.sidebar-overlay.show{display:block;opacity:1;}
+.sidebar-overlay.show .sidebar{transform:translateX(-300px);}
+.close-menu{
+  position:absolute;top:25px;right:25px;
+  font-size:1.6rem;color:var(--muted);
+  cursor:pointer;transition:.3s;
+}
+.close-menu:hover{color:var(--text);transform:rotate(90deg);}
+
+/* MODALS */
+.modal-overlay{
+  position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.85);z-index:3000;padding:20px;
+}
+.modal-box{
+  background:#111;border-radius:12px;padding:30px 40px;
+  max-width:780px;width:90%;max-height:90vh;overflow:auto;
+  color:var(--text);
+  box-shadow:0 20px 60px rgba(0,0,0,0.8);
+  transform:translateY(20px);opacity:0;
+  transition:all .4s var(--ease);
+}
+.modal-overlay.show{display:flex;}
+.modal-overlay.show .modal-box{transform:translateY(0);opacity:1;}
+.close-btn{position:absolute;top:20px;right:30px;color:var(--muted);font-size:1.8em;cursor:pointer}
+.modal-box h2{margin-bottom:12px;color:var(--text);}
+.modal-box h3{color:var(--text);margin-top:18px;margin-bottom:8px;}
+.modal-box ul{list-style:none;line-height:1.7;margin-bottom:8px;color:var(--muted);}
+.modal-box p{color:var(--muted)}
+
+@media(max-width:900px){
+  .hero{flex-direction:column;}
+  .hero-right{padding:28px;}
+}
+</style>
 </head>
+
 <body>
-    <!-- header -->
-     <div id="header">
-        <h2>Học class và id</h2>
-        <p>Học menu đa cấp</p>
-     </div>
-     <div id="menu">
-        <ul>
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="">Giới thiệu</a>
-             <ul>
-                <li><a href="">Giao diện</a></li>
-                <li>
-                    <a href="">Thiết bị</a>
-                    <ul>
-                    <li><a href="">Điện thoại</a></li>
-                    <li><a href="">Laptop</a></li>
-                    <li><a href="">Ipad</a></li>
-                </ul>
-            </li>
-            <li><a href="">Phụ kiện</a></li>
 
-            </ul>
-        </li>
-            <li><a href="">Sản phẩm</a></li>
-            <li><a href="">Liên hệ</a></li>
-            <li><a href="">Tin tức</a></li>
+<header class="topnav">
+  <div class="brand"></div>
+  <button class="hambtn" id="openMenu"><i class="fas fa-bars"></i></button>
+</header>
 
-        </ul>
-     </div>
-     <!-- Nội dung -->
-      <div id="main">
-        <div id="content" class="box">
-            <h2 class="title">Học menu class và id</h2>
-            <p>đây là phần nội dung chính của trang web
-                Nó sử dụng <b>id="Content"</b> để định vị bố cục
-                <b>class="box"</b> để định dạng khung trắng
-            </p>
-            <p>
-                Thanh menu phía trên <b>menu đa cấp</b>
-                khi trò chuột vào sẽ tự động hiện menu con ra
-            </p>
-            <a href="" class="btn">Xem thêm</a>
-        </div>
-      </div>
-      <div id="sidebar" class="box">
-        <p>
-            Đây là phần sidebar. Cũng dùng class <b>.box</b>
-            Để có cùng phong cách với nội dung chính
-        </p>
-        <a href="" class="button">Liên hệ</a>
-      </div>
-     <!-- Footer -->
-      <p align="center">© 2025 - Nguyễn Văn A copyright</p>
+<!-- SIDEBAR MENU -->
+<div class="sidebar-overlay" id="sidebarOverlay">
+  <div class="sidebar">
+    <span class="close-menu" id="closeMenu">&times;</span>
+    <a href="#intro">Trang chủ</a>
+    <button id="openPersonal">Cá nhân</button>
+    <button id="openCV"> CV cá nhân</button>
+    <button id="openContact">Liên hệ</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="intro">
+  <div class="hero-left"><img src="thập cẩm/anh.jpg" alt="" width="500" height="500"></div>
+  <div class="hero-right">
+    <h1>Đinh Đức Vinh</h1>
+    <h3>Sinh viên ngành Hệ thống thông tin</h3>
+    <p>Tôi đam mê công nghệ và phát triển các giải pháp giúp doanh nghiệp hoạt động hiệu quả hơn.</p>
+    <ul class="meta-list">
+      <li><i class="fas fa-map-marker-alt"></i> Xã Giao Ninh, Tỉnh Ninh Bình</li>
+      <li><i class="fas fa-phone"></i> 0774 341 161</li>
+      <li><i class="fas fa-envelope"></i> dvinhh3707@gmail.com</li>
+    </ul>
+    <div class="actions">
+      <button class="btn primary" id="openCV2"><i class="fas fa-file"></i> CV cá nhân</button>
+      <button class="btn primary" id="openPersonal2"><i class="fas fa-user"></i> Cá nhân</button>
+    </div>
+    <div class="socials">
+      <a href="https://www.facebook.com/share/1BQC11aPVS/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"> </i></a>
+      <a href="https://www.tiktok.com/@vin.duc37?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.instagram.com/d.vinhh37?igsh=MWN4YTZ0aHU1ODhibg%3D%3D&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+  </div>
+</section>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="personalModal">
+  <div class="modal-box">
+    <span class="close-btn" id="closePersonal">&times;</span>
+    <h2>Thông tin cá nhân</h2>
+    <ul>
+      <li><strong>Họ và tên:</strong> Đinh Đức Vinh</li>
+      <li><strong>Ngày sinh:</strong> 03/07/2007</li>
+      <li><strong>Giới tính:</strong> Nam</li>
+      <li><strong>Địa chỉ:</strong> Xã Giao Ninh, Tỉnh Ninh Bình</li>
+      <li><strong>Số điện thoại:</strong> 0774 341 161</li>
+      <li><strong>Email:</strong> dvinhh3707@gmail.com</li>
+    </ul>
+    <h3>Kỹ năng</h3>
+    <p>Cơ bản về HTML, CSS</p>
+    <h3>Kinh nghiệm</h3>
+    <p>kinh nghiệm chuyên sâu kiến thức 1 tháng học tập</p>
+    <h3>Học vấn</h3>
+    <p>Đại học Đại Nam — Ngành Hệ thống thông tin (2025 - 2029)</p>
+    <h3>Sở thích</h3>
+    <p>Nghe nhạc, chơi game</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="cvModal">
+  <div class="modal-box">
+    <span class="close-btn" id="closeCV">&times;</span>
+    <h2>CV - Đinh Đức Vinh</h2>
+    <h3>Học vấn</h3>
+    <p>Đại học Đại Nam — Hệ thống thông tin (2025 – 2029)</p>
+    <h3>Kinh nghiệm</h3>
+    <p>Kinh nghiệm với 1 tháng học tập</p>
+    <h3>Kỹ năng</h3>
+    <p>HTML, CSS</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <span class="close-btn" id="closeContact">&times;</span>
+    <h2>Liên hệ</h2>
+    <p><i class="fas fa-phone"></i> 0774 341 161</p>
+    <p><i class="fas fa-envelope"></i> dvinhh3707@gmail.com</p>
+  </div>
+</div>
+
+<script>
+const overlay=document.getElementById('sidebarOverlay');
+document.getElementById('openMenu').onclick=()=>overlay.classList.add('show');
+document.getElementById('closeMenu').onclick=()=>overlay.classList.remove('show');
+overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('show');});
+
+const modals={
+  personal:document.getElementById('personalModal'),
+  cv:document.getElementById('cvModal'),
+  contact:document.getElementById('contactModal')
+};
+function show(m){m.style.display='flex';setTimeout(()=>m.classList.add('show'),10);document.body.style.overflow='hidden';}
+function hide(m){m.classList.remove('show');m.style.display='none';document.body.style.overflow='auto';}
+document.querySelectorAll('#openPersonal,#openPersonal2').forEach(b=>b.onclick=()=>show(modals.personal));
+document.querySelectorAll('#openCV,#openCV2').forEach(b=>b.onclick=()=>show(modals.cv));
+document.querySelectorAll('#openContact').forEach(b=>b.onclick=()=>show(modals.contact));
+document.getElementById('closePersonal').onclick=()=>hide(modals.personal);
+document.getElementById('closeCV').onclick=()=>hide(modals.cv);
+document.getElementById('closeContact').onclick=()=>hide(modals.contact);
+Object.values(modals).forEach(m=>m.addEventListener('click',e=>{if(e.target===m)hide(m)}));
+</script>
 </body>
 </html>
