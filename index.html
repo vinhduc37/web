@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học menu đa cấp với class và id</title>
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <!-- header -->
+     <div id="header">
+        <h2>Học class và id</h2>
+        <p>Học menu đa cấp</p>
+     </div>
+     <div id="menu">
+        <ul>
+            <li><a href="#">Trang chủ</a></li>
+            <li><a href="">Giới thiệu</a>
+             <ul>
+                <li><a href="">Giao diện</a></li>
+                <li>
+                    <a href="">Thiết bị</a>
+                    <ul>
+                    <li><a href="">Điện thoại</a></li>
+                    <li><a href="">Laptop</a></li>
+                    <li><a href="">Ipad</a></li>
+                </ul>
+            </li>
+            <li><a href="">Phụ kiện</a></li>
+
+            </ul>
+        </li>
+            <li><a href="">Sản phẩm</a></li>
+            <li><a href="">Liên hệ</a></li>
+            <li><a href="">Tin tức</a></li>
+
+        </ul>
+     </div>
+     <!-- Nội dung -->
+      <div id="main">
+        <div id="content" class="box">
+            <h2 class="title">Học menu class và id</h2>
+            <p>đây là phần nội dung chính của trang web
+                Nó sử dụng <b>id="Content"</b> để định vị bố cục
+                <b>class="box"</b> để định dạng khung trắng
+            </p>
+            <p>
+                Thanh menu phía trên <b>menu đa cấp</b>
+                khi trò chuột vào sẽ tự động hiện menu con ra
+            </p>
+            <a href="" class="btn">Xem thêm</a>
+        </div>
+      </div>
+      <div id="sidebar" class="box">
+        <p>
+            Đây là phần sidebar. Cũng dùng class <b>.box</b>
+            Để có cùng phong cách với nội dung chính
+        </p>
+        <a href="" class="button">Liên hệ</a>
+      </div>
+     <!-- Footer -->
+      <p align="center">© 2025 - Nguyễn Văn A copyright</p>
+</body>
+</html>
